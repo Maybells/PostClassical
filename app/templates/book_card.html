@@ -1,0 +1,34 @@
+<div class="book"><tr>
+    <td style="font-size:1.5em; text-align: left; padding-left: 32px; padding-right: 32px;"><i>{{ book.title }}</i></td>
+
+    <td>by
+    {% if book.authors %}
+        {% for auth in book.authors %}
+        <a href="{{ url_for('view', author=auth.name) }}">{{ auth.name }}</a>{{ ", " if not loop.last }}
+        {% endfor %}
+    {% else %}
+      Unspecified
+    {% endif %}
+    <br>in
+    {% for sub in book.subjects %}
+    <a href="{{ url_for('view', subject=sub.name) }}">{{ sub.name }}</a>{{ ", " if not loop.last }}
+    {% endfor %}
+</td>
+
+<td>
+    <b>Printings:</b>
+    <ul>
+    {% for print in book.printings %}
+    <li>
+    <a href="{{ print.url }}">
+    {% if print.year == 9999 %}
+        Undated
+    {% else %}
+        {{ print.year }}
+    {% endif %}
+     edition</a> (<a href="{{ url_for('view', website=print.site.name) }}">{{ print.site.name }}</a>)
+    </li>
+    {% endfor %}
+</ul>
+</td>
+    </tr></div>

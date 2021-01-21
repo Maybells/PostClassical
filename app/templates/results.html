@@ -1,0 +1,18 @@
+{% from "macros.html" import render_pagination with context %}
+
+{% extends "base.html" %}
+{% block content %}
+<div class="display">
+    <table style="width:70%">
+        <colgroup>
+            <col style="width: 50%;"/>
+            <col style="width: 20%;"/>
+            <col style="width: 30%;"/>
+        </colgroup>
+        {% for book in books.items %}
+        {% include "book_card.html" %}
+        {% endfor %}
+    </table>
+    </div>
+    {{ render_pagination(books, endpoint) }}
+{% endblock %}
