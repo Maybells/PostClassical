@@ -1,0 +1,15 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+    <title>Post-Classical Library</title>
+</head>
+<body>
+    <div class="topnav">
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('subjects') }}">Subjects</a>
+        <a href="{{ url_for('search') }}">Search</a>
+        <a href="{{ url_for('websites') }}">Sources</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+    </div>
+    <h1>{{ title }}</h1>
+    {% block content %}{% endblock %}
+</body>
