@@ -1,9 +1,0 @@
-{% from "macros.html" import render_pagination with context %}
-
-{% extends "base.html" %}
-{% block content %}
-        {% for website in websites.items %}
-        {{ website.name }} - (<a href="{{ url_for('view', website=website.name) }}">{{ website.count }} book{% if website.count > 1 %}s{% endif %}</a>)<br>
-        {% endfor %}
-        {{ render_pagination(websites, endpoint) }}
-{% endblock %}

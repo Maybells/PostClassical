@@ -1,9 +1,0 @@
-{% from "macros.html" import render_pagination with context %}
-
-{% extends "base.html" %}
-{% block content %}
-        {% for subject in subjects.items %}
-        {{ subject.name }} - (<a href="{{ url_for('view', subject=subject.name) }}">{{ subject.count }} book{% if subject.count > 1 %}s{% endif %}</a>)<br>
-        {% endfor %}
-        {{ render_pagination(subjects, endpoint) }}
-{% endblock %}

@@ -1,0 +1,13 @@
+{% from "macros.html" import render_pagination with context %}
+
+{% extends "base.html" %}
+{% block content %}
+        <a href="{{ url_for(endpoint, order='frequency')}}">Sort by Frequency</a>
+        &nbsp;
+        <a href="{{ url_for(endpoint, order='alphabetical')}}">Sort by Name</a>
+        <br><br>
+        {% for item in lst.items %}
+        {{ item.name }} - ({% if endpoint == 'subjects' %}<a href="{{ url_for('view', subject=item.name) }}">{% else %}<a href="{{ url_for('view', website=item.name) }}">{% endif %}{{ item.count }} book{% if item.count > 1 %}s{% endif %}</a>)<br>
+        {% endfor %}
+        {{ render_pagination(lst, endpoint) }}
+{% endblock %}

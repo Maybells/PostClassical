@@ -74,14 +74,22 @@ def view():
 @app.route('/subjects/')
 @app.route('/subjects/<int:page>')
 def subjects(page=1):
-    lst = Subject.query.order_by(Subject.count.desc()).paginate(page=page, per_page=app.config['CATEGORIES_PER_PAGE'])
-    return render_template('subjects.html', subjects=lst, endpoint='subjects', vars=request.args)
+    args = request.args
+    if 'order' in args and args['order'] == 'alphabetical':
+        lst = Subject.query.order_by(Subject.name).paginate(page=page, per_page=app.config['CATEGORIES_PER_PAGE'])
+    else:
+        lst = Subject.query.order_by(Subject.count.desc()).paginate(page=page, per_page=app.config['CATEGORIES_PER_PAGE'])
+    return render_template('categories.html', lst=lst, endpoint='subjects', vars=request.args)
 
 @app.route('/sources/')
 @app.route('/sources/<int:page>')
 def websites(page=1):
-    lst = Website.query.order_by(Website.count.desc()).paginate(page=page, per_page=app.config['CATEGORIES_PER_PAGE'])
-    return render_template('websites.html', websites=lst, endpoint='websites', vars=request.args)
+    args = request.args
+    if 'order' in args and args['order'] == 'alphabetical':
+        lst = Website.query.order_by(Website.name).paginate(page=page, per_page=app.config['CATEGORIES_PER_PAGE'])
+    else:
+        lst = Website.query.order_by(Website.count.desc()).paginate(page=page, per_page=app.config['CATEGORIES_PER_PAGE'])
+    return render_template('categories.html', lst=lst, endpoint='websites', vars=request.args)
 
 @app.route('/')
 def home():
