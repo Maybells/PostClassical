@@ -1,40 +1,47 @@
 {% extends "base.html" %}
 {% block content %}
-    <form action="" method="post">
-        <p>
-            {{ form.title.label }}<br>
-            {{ form.title(size=32, class_='search') }}
-        </p>
-        <p>
-            {{ form.author.label }}<br>
-            {{ form.author(size=32, class_='search') }}
-            <!-- {{ form.author(size=32, autocomplete='off', id='authorInput', class_='search', onclick='revealDropdown("authorDropdown", "authorInput")', onblur='hideDropdown("authorDropdown")', onkeyup='filterFunction("authorInput", "authorDropdown")') }}
-            <span id="authorDropdown" class="dropdown-content">
-                {% for author in authors %}
-                <span onMouseDown="fillInput('authorInput', '{{ author.name }}')">{{ author.name }}</span>
-                {% endfor %}
-            </span> -->
-        </p>
-        <p>
-            {{ form.subject.label }}<br>
-            {{ form.subject(size=32, autocomplete='off', id='subjectInput', class_='search', onclick='revealDropdown("subjectDropdown", "subjectInput")', onblur='hideDropdown("subjectDropdown")', onkeyup='filterFunction("subjectInput", "subjectDropdown")') }}
-            <span id="subjectDropdown" class="dropdown-content">
-                {% for subject in subjects %}
-                <span onMouseDown="fillInput('subjectInput', '{{ subject.name }}')">{{ subject.name }}</span>
-                {% endfor %}
+    <div class="search-form">
+        <form action="" method="post"">
+            <p>
+                {{ form.title.label }}:
+                {{ form.title(size=32, class_='search') }}
+            </p>
+            <p>
+                {{ form.author.label }}:
+                {{ form.author(size=32, class_='search') }}
+                <!-- {{ form.author(size=32, autocomplete='off', id='authorInput', class_='search', onclick='revealDropdown("authorDropdown", "authorInput")', onblur='hideDropdown("authorDropdown")', onkeyup='filterFunction("authorInput", "authorDropdown")') }}
+                <span id="authorDropdown" class="dropdown-content">
+                    {% for author in authors %}
+                    <span onMouseDown="fillInput('authorInput', '{{ author.name }}')">{{ author.name }}</span>
+                    {% endfor %}
+                </span> -->
+            </p>
+            <p>
+                {{ form.subject.label }}:
+                <span class="search-bar">
+                    {{ form.subject(size=32, autocomplete='off', id='subjectInput', class_='search', onclick='revealDropdown("subjectDropdown", "subjectInput")', onblur='hideDropdown("subjectDropdown")', onkeyup='filterFunction("subjectInput", "subjectDropdown")') }}
+                    <span id="subjectDropdown" class="dropdown-content">
+                    {% for subject in subjects %}
+                    <span onMouseDown="fillInput('subjectInput', '{{ subject.name }}')">{{ subject.name }}</span>
+                    {% endfor %}
+                </span>
             </span>
-        </p>
-        <p>
-            {{ form.website.label }}<br>
-            {{ form.website(size=32, autocomplete='off', id='websiteInput', class_='search', onclick='revealDropdown("websiteDropdown", "websiteInput")', onblur='hideDropdown("websiteDropdown")', onkeyup='filterFunction("websiteInput", "websiteDropdown")') }}
-            <span id="websiteDropdown" class="dropdown-content">
-                {% for website in websites %}
-                <span onMouseDown="fillInput('websiteInput', '{{ website.name }}')">{{ website.name }}</span>
-                {% endfor %}
-            </span>
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
+            </p>
+            <p>
+                {{ form.website.label }}:
+                <span class="search-bar">
+                    {{ form.website(size=32, autocomplete='off', id='websiteInput', class_='search', onclick='revealDropdown("websiteDropdown", "websiteInput")', onblur='hideDropdown("websiteDropdown")', onkeyup='filterFunction("websiteInput", "websiteDropdown")') }}
+                    <span id="websiteDropdown" class="dropdown-content">
+                    {% for website in websites %}
+                    <span onMouseDown="fillInput('websiteInput', '{{ website.name }}')">{{ website.name }}</span>
+                    {% endfor %}
+                </span>
+                </span>
+            </p>
+            <p>{{ form.submit() }}</p>
+        </form>
+    </div>
+    
 
     <script>
 
