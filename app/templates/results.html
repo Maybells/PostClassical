@@ -9,9 +9,13 @@
             <col style="width: 20%;"/>
             <col style="width: 30%;"/>
         </colgroup>
+        {% if books.items|count == 0 %}
+        No books found
+        {% else %}
         {% for book in books.items %}
         {% include "book_card.html" %}
         {% endfor %}
+        {% endif %}
     </table>
     </div>
     {{ render_pagination(books, endpoint) }}
