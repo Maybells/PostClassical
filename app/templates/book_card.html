@@ -11,7 +11,7 @@
     {% endif %}
     <br>in
     {% for sub in book.subjects %}
-    <a href="{{ url_for('view', subject=sub.name) }}">{{ sub.name }}</a>{{ ", " if not loop.last }}
+    <a href="{{ url_for('view', **{config['SUBJECT_NAME']: sub.name}) }}">{{ sub.name }}</a>{{ ", " if not loop.last }}
     {% endfor %}
 </td>
 

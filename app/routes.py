@@ -19,7 +19,7 @@ def search():
             form.website.data = None
         if form.title.data == '':
             form.title.data = None
-        return redirect(url_for('view', title=form.title.data, author=form.author.data, website=form.website.data, subject=form.subject.data))
+        return redirect(url_for('view', title=form.title.data, author=form.author.data, website=form.website.data, **{app.config['SUBJECT_NAME']: form.subject.data}))
     
     subjects = Subject.query.order_by(Subject.name).all()
     #authors = Author.query.order_by(Author.name).all()
@@ -27,7 +27,7 @@ def search():
     return render_template('search.html', form=form, subjects=subjects, websites=websites)
 
 def match_args(input):
-    args = ['author', 'website', 'subject']
+    args = ['author', 'website', app.config['SUBJECT_NAME']]
     out = []
     for arg in args:
         if arg in input:
@@ -65,13 +65,13 @@ def view():
         query = query.join(Book.authors).filter(Author.name.like(pattern))
     if 'website' in args and args['website'] != '':
         query = query.join(Book.websites).filter_by(name = args['website'])
-    if 'subject' in args and args['subject'] != '':
-        query = query.join(Book.subjects).filter_by(name = args['subject'])
+    if app.config['SUBJECT_NAME'] in args and args[app.config['SUBJECT_NAME']] != '':
+        query = query.join(Book.subjects).filter_by(name = args[app.config['SUBJECT_NAME']])
     result = query.paginate(page=page, per_page=app.config['BOOKS_PER_PAGE'])
 
     return render_template('results.html', title = title, books = result, endpoint='view', vars=vars)
 
-@app.route('/subjects/')
+@app.route(f'/subjects/')
 @app.route('/subjects/<int:page>')
 def subjects(page=1):
     args = request.args

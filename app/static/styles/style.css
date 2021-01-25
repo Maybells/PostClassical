@@ -8,6 +8,7 @@ h1{
 }
 
 .topnav {
+    border-radius: 7.5px;
     background-color: #544a3cff;
     overflow: hidden;
   }

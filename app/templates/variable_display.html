@@ -7,7 +7,7 @@
         <a href="{{ url_for(endpoint, order='alphabetical')}}">Sort by Name</a>
         <br><br>
         {% for item in lst.items %}
-        {{ item.name }} - ({% if endpoint == 'subjects' %}<a href="{{ url_for('view', subject=item.name) }}">{% else %}<a href="{{ url_for('view', website=item.name) }}">{% endif %}{{ item.count }} book{% if item.count > 1 %}s{% endif %}</a>)<br>
+        {{ item.name }} - ({% if endpoint == 'subjects' %}<a href="{{ url_for('view', **{config['SUBJECT_NAME']: item.name}) }}">{% else %}<a href="{{ url_for('view', website=item.name) }}">{% endif %}{{ item.count }} book{% if item.count > 1 %}s{% endif %}</a>)<br>
         {% endfor %}
         {{ render_pagination(lst, endpoint) }}
 {% endblock %}
